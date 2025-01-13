@@ -2,24 +2,24 @@
     "manifest_version": 2,
     "name": "D R F R F",
     "version": "0.1",
-  
     "description": "Dark reader for RuFoundation. Adds specific dark theme for scpfoundation.net.",
-  
     "icons": {
-      "48": "icons/interior.png"
+        "48": "icons/interior.png"
     },
-
     "browser_specific_settings": {
         "gecko": {
-          "id": "D-R-F-R-F@github.com/JohnLyetacker"
+            "update_url": "https://github.com/JohnLyetacker/DarkReaderForRuFoundation/blob/3f8a1158cd86e2044c10fdbad405dcb8da993f92/updates.json",
+            "id": "D-R-F-R-F@github.com/JohnLyetacker"
         }
-      },
-  
+    },
     "content_scripts": [
-      {
-        "matches": ["*://*.scpfoundation.net/*"],
-        "js": ["drfrf.js"]
-      }
+        {
+            "matches": [
+                "*://*.scpfoundation.net/*"
+            ],
+            "js": [
+                "drfrf.js"
+            ]
+        }
     ]
-  }
-  
+}

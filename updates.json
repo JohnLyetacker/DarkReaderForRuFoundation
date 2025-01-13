@@ -1,0 +1,12 @@
+{
+    "addons": {
+        "{abcd1234-1abc-1234-12ab-abcdef123456}": {
+            "updates": [
+                {
+                    "version": "0.1",
+                    "update_link": "https://github.com/JohnLyetacker/DarkReaderForRuFoundation/blob/3f8a1158cd86e2044c10fdbad405dcb8da993f92/drfrf.xpi"
+                }
+            ]
+        }
+    }
+}
