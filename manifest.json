@@ -1,7 +1,7 @@
 {
     "manifest_version": 2,
     "name": "D R F R F",
-    "version": "0.1",
+    "version": "0.2",
     "description": "Dark reader for RuFoundation. Adds specific dark theme for scpfoundation.net.",
     "icons": {
         "48": "icons/interior.png"
@@ -17,9 +17,17 @@
             "matches": [
                 "*://*.scpfoundation.net/*"
             ],
+            "exclude_matches": [
+                "*://*.scpfoundation.net/draft:*",
+                "*://*.scpfoundation.net/theme:*",
+                "*://*.scpfoundation.net/system:*",
+                "*://*.scpfoundation.net/component:*",
+                "*://*.scpfoundation.net/fragment:*"
+            ],
             "js": [
                 "drfrf.js"
-            ]
+            ],
+            "run_at": "document_start"
         }
     ]
 }
