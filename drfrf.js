@@ -1,6 +1,8 @@
 document.addEventListener('DOMContentLoaded', () => {
     applyStyles();
-    setTimeout(applyStyles, 2000);
+    window.addEventListener('load', () => {
+        setTimeout(applyStyles, 2000);
+    });
 });
 
 const applyStyles = () => {
@@ -25,30 +27,66 @@ const applyStyles = () => {
         }
     }
 
+    // I hate interwiki
+    document.documentElement.style.setProperty('--new-side-bar-color', '#9179e7');
+
     // Exclude specific page elements from being darkened
-    const elements = Array.from(document.getElementById('content-wrap').getElementsByTagName('*')).filter(el => !el.closest('.apcs-container') && !el.closest('.anom-bar-container') && !el.closest('.random-article-block')/* Figure out the way to do sum sex to this element later */);
-    for (let i = 0; i < elements.length; i++) {
-        elements[i].style.backgroundColor = "#1a1a1a";
-        elements[i].style.color = "#ededed";
-    }
-
-    // Apply dark color to background cuz this element annoys me
-    document.getElementById('container-wrap').style.backgroundColor = "#1a1a1a";
-
-    // Change background image
-    document.getElementById('container-wrap').style.backgroundImage = "url('https://files.scpfoundation.net/local--files/theme:night-rush-theme/night-rush-header.png')";
-    document.getElementById('container-wrap').style.backgroundPosition = "top left";
-    document.getElementById('container-wrap').style.backgroundRepeat = "repeat-x";
-
-    // Change link colors but exclude anom-bar links
-    const links = document.getElementById('content-wrap').getElementsByTagName('a');
-    for (let i = 0; i < links.length; i++) {
-        if (!links[i].closest('.anom-bar-container') && !links[i].closest('.apcs-container')) {
-            links[i].style.color = "#9179E7";
-            const childElements = links[i].getElementsByTagName('*');
-            for (let j = 0; j < childElements.length; j++) {
-                childElements[j].style.color = "#9179E7";
+    const contentWrap = document.getElementById('content-wrap');
+    if (contentWrap) {
+        const elements = contentWrap.getElementsByTagName('*');
+        for (let i = 0; i < elements.length; i++) {
+            if (!elements[i].closest('.apcs-container') &&
+                !elements[i].closest('.anom-bar-container') &&
+                !elements[i].closest('.random-article-block') &&
+                !elements[i].closest('.scp-front-button')) {
+                elements[i].style.backgroundColor = "#1a1a1a";
+                elements[i].style.color = "#ededed";
             }
         }
     }
-};
+    const containerWrap = document.getElementById('container-wrap');
+    if (containerWrap) {
+        const containerWrap = document.getElementById('container-wrap');
+        if (containerWrap) {
+            containerWrap.style.backgroundColor = "#1a1a1a";
+
+            // Change background image
+            containerWrap.style.backgroundImage = "url('https://files.scpfoundation.net/local--files/theme:night-rush-theme/night-rush-header.png')";
+            containerWrap.style.backgroundPosition = "top left";
+            containerWrap.style.backgroundRepeat = "repeat-x";
+        }
+    }
+    document.getElementById('container-wrap').style.backgroundPosition = "top left";
+    if (contentWrap) {
+        const links = contentWrap.getElementsByTagName('a');
+        for (let i = 0; i < links.length; i++) {
+            if (!links[i].closest('.anom-bar-container') && !links[i].closest('.apcs-container') && !links[i].closest('.scp-front-button')) {
+                if (links[i].className === 'newpage') {
+                    links[i].style.color = "#d61";
+                    continue;
+                }
+                links[i].style.color = "#9179E7";
+                const childElements = links[i].getElementsByTagName('*');
+                for (let j = 0; j < childElements.length; j++) {
+                    childElements[j].style.color = "#9179E7";
+                    // Change color of elements with .scp-front-title class
+                    const scpFrontTitleElements = document.getElementsByClassName('scp-front-title');
+                    if (scpFrontTitleElements.length > 0) {
+                        for (let i = 0; i < scpFrontTitleElements.length; i++) {
+                            scpFrontTitleElements[i].style.color = "#1a1a1a";
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+    // Change color of footer links
+    const pageOptionsBottom = document.getElementById('page-options-bottom');
+    if (pageOptionsBottom) {
+        const footerLinks = pageOptionsBottom.getElementsByTagName('a');
+        for (let i = 0; i < footerLinks.length; i++) {
+            footerLinks[i].style.color = "#9179E7";
+        }
+    }
+}
