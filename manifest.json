@@ -9,7 +9,7 @@
     "browser_specific_settings": {
         "gecko": {
             "update_url": "https://github.com/JohnLyetacker/DarkReaderForRuFoundation/blob/main/updates.json",
-            "id": "D-R-F-R-F@github.com/JohnLyetacker"
+            "id": "D-R-F-R-F@github.com"
         }
     },
     "content_scripts": [
