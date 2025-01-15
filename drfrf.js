@@ -1,8 +1,8 @@
 document.addEventListener('DOMContentLoaded', () => {
     applyStyles();
-    window.addEventListener('load', () => {
-        setTimeout(applyStyles, 2000);
-    });
+
+    setTimeout(applyStyles, 4000);
+
 });
 
 function applyStyles() {
@@ -35,8 +35,7 @@ function applyStyles() {
         }
     }
 
-    // I hate interwiki
-    document.documentElement.style.setProperty('--new-side-bar-color', '#9179e7');
+
 
     // Exclude specific page elements from being darkened
     const contentWrap = document.getElementById('content-wrap');
@@ -53,6 +52,8 @@ function applyStyles() {
         }
     }
 
+
+
     // Change background color
     const containerWrap = document.getElementById('container-wrap');
     if (containerWrap) {
@@ -63,6 +64,7 @@ function applyStyles() {
         containerWrap.style.backgroundPosition = "top left";
         containerWrap.style.backgroundRepeat = "repeat-x";
     }
+
 
     // Change color of links
     if (contentWrap) {
@@ -89,12 +91,32 @@ function applyStyles() {
         }
     }
 
-    // Change color of footer links
-    const pageOptionsBottom = document.getElementsByClassName('page-options-bottom');
-    if (pageOptionsBottom) {
-        const footerLinks = pageOptionsBottom.getElementsByTagName('a');
-        for (let i = 0; i < footerLinks.length; i++) {
-            footerLinks[i].style.color = "#9179E7";
+    /* fix this shit it doesnt work and also stops the whole script from continuing after this
+        // Change color of footer links
+        const pageOptionsBottom = document.getElementsByClassName('page-options-bottom');
+        if (pageOptionsBottom) {
+            const footerLinks = pageOptionsBottom.getElementsByTagName('a');
+            for (let i = 0; i < footerLinks.length; i++) {
+                footerLinks[i].style.color = "#9179E7";
+            }
         }
-    }
+    */
+
+    // I hate interwiki
+    document.documentElement.style.setProperty('--new-side-bar-color', '#9179e7');
+    setTimeout(() => {
+        const interwikiContainer = document.getElementsByClassName('w-interwiki');
+        if (interwikiContainer.length > 0) {
+            for (let i = 0; i < interwikiContainer.length; i++) {
+                const sideBlockElements = interwikiContainer[i].getElementsByClassName('side-block');
+                for (let j = 0; j < sideBlockElements.length; j++) {
+                    sideBlockElements[j].style.backgroundColor = "#1a1a1a";
+                    const links = sideBlockElements[j].getElementsByTagName('a');
+                    for (let k = 0; k < links.length; k++) {
+                        links[k].style.color = "#9179E7";
+                    }
+                }
+            }
+        }
+    }, 1000);
 }
