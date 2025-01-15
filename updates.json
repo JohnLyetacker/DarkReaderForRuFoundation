@@ -9,6 +9,10 @@
                 {
                     "version": "0.2",
                     "update_link": "https://github.com/JohnLyetacker/DarkReaderForRuFoundation/blob/main/builds/drfrf-0.2.xpi"
+                },
+                {
+                    "version": "0.3",
+                    "update_link": "https://github.com/JohnLyetacker/DarkReaderForRuFoundation/blob/main/builds/drfrf-0.3.xpi"
                 }
             ]
         }

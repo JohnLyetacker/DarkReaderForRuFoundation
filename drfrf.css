@@ -1,0 +1,23 @@
+.thread-container .post .head {
+    background-image: linear-gradient(to right, #1a1a1a, #1a1a1a);
+    box-shadow: inset 2px 3px 6px rgb(0, 0, 0);
+}
+
+.forum-thread-box .description-block {
+    background-color: #1a1a1a;
+    background-image: linear-gradient(to right, #1a1a1a, #1a1a1a);
+    box-shadow: inset 2px 3px 6px rgb(0, 0, 0);
+}
+
+/* idk why but this one doenst wanna work */
+.w-forum-thread-options>.btn {
+    color: #9179e7;
+}
+
+.page-options-bottom>.btn {
+    color: #9179e7;
+}
+
+#license-area a {
+    color: #9179e7;
+}

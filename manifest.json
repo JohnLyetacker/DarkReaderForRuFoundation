@@ -20,13 +20,14 @@
             "exclude_matches": [
                 "*://*.scpfoundation.net/draft:*",
                 "*://*.scpfoundation.net/theme:*",
-                "*://*.scpfoundation.net/system:*",
                 "*://*.scpfoundation.net/component:*",
-                "*://*.scpfoundation.net/fragment:*"
+                "*://*.scpfoundation.net/fragment:*",
+                "*://*.scpfoundation.net/-/*"
             ],
             "js": [
                 "drfrf.js"
             ],
+
             "run_at": "document_start"
         }
     ]

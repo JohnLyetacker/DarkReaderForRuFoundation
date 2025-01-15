@@ -15,7 +15,7 @@ function applyStyles() {
         return;
     }
 
-    // FUCK FUCK THIS PAGE HAS NONSTANDARD HEADER ABORT
+    // FUCK FUCK THIS PAGE HAS NONSTANDARD HEADER ALL ABANDON SHIP
     const headerElement = document.getElementById('header');
     if (headerElement) {
         const children = headerElement.getElementsByTagName('*');
@@ -35,8 +35,6 @@ function applyStyles() {
         }
     }
 
-
-
     // Exclude specific page elements from being darkened
     const contentWrap = document.getElementById('content-wrap');
     if (contentWrap) {
@@ -45,14 +43,13 @@ function applyStyles() {
             if (!elements[i].closest('.apcs-container') &&
                 !elements[i].closest('.anom-bar-container') &&
                 !elements[i].closest('.random-article-block') &&
-                !elements[i].closest('.scp-front-button')) {
+                !elements[i].closest('.scp-front-button') &&
+                !elements[i].closest('.lb-article-class')) {
                 elements[i].style.backgroundColor = "#1a1a1a";
                 elements[i].style.color = "#ededed";
             }
         }
     }
-
-
 
     // Change background color
     const containerWrap = document.getElementById('container-wrap');
@@ -64,7 +61,6 @@ function applyStyles() {
         containerWrap.style.backgroundPosition = "top left";
         containerWrap.style.backgroundRepeat = "repeat-x";
     }
-
 
     // Change color of links
     if (contentWrap) {
@@ -91,32 +87,37 @@ function applyStyles() {
         }
     }
 
-    /* fix this shit it doesnt work and also stops the whole script from continuing after this
-        // Change color of footer links
-        const pageOptionsBottom = document.getElementsByClassName('page-options-bottom');
-        if (pageOptionsBottom) {
-            const footerLinks = pageOptionsBottom.getElementsByTagName('a');
-            for (let i = 0; i < footerLinks.length; i++) {
-                footerLinks[i].style.color = "#9179E7";
-            }
-        }
-    */
-
     // I hate interwiki
     document.documentElement.style.setProperty('--new-side-bar-color', '#9179e7');
-    setTimeout(() => {
-        const interwikiContainer = document.getElementsByClassName('w-interwiki');
-        if (interwikiContainer.length > 0) {
-            for (let i = 0; i < interwikiContainer.length; i++) {
-                const sideBlockElements = interwikiContainer[i].getElementsByClassName('side-block');
-                for (let j = 0; j < sideBlockElements.length; j++) {
-                    sideBlockElements[j].style.backgroundColor = "#1a1a1a";
-                    const links = sideBlockElements[j].getElementsByTagName('a');
-                    for (let k = 0; k < links.length; k++) {
-                        links[k].style.color = "#9179E7";
+    const observer = new MutationObserver((mutations) => {
+        mutations.forEach((mutation) => {
+            if (mutation.addedNodes.length) {
+                const interwikiContainer = document.getElementsByClassName('w-interwiki');
+                if (interwikiContainer.length > 0) {
+                    for (let i = 0; i < interwikiContainer.length; i++) {
+                        const sideBlockElements = interwikiContainer[i].getElementsByClassName('side-block');
+                        for (let j = 0; j < sideBlockElements.length; j++) {
+                            sideBlockElements[j].style.backgroundColor = "#1a1a1a";
+                            const links = sideBlockElements[j].getElementsByTagName('a');
+                            for (let k = 0; k < links.length; k++) {
+                                links[k].style.color = "#9179E7";
+                            }
+                        }
                     }
                 }
             }
-        }
-    }, 1000);
+        });
+    });
+    observer.observe(document.body, { childList: true, subtree: true });
+
+    // Load CSS file for system css that is not possible to apply via JS
+    function loadCSS(filename) {
+        var link = document.createElement("link");
+        link.rel = "stylesheet";
+        link.type = "text/css";
+        link.href = filename;
+        document.head.appendChild(link);
+    }
+    loadCSS(chrome.runtime.getURL("drfrf.css"));
+    observer.observe(document.body, { childList: true, subtree: true });
 }
