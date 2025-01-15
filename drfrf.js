@@ -65,7 +65,6 @@ function applyStyles() {
     }
 
     // Change color of links
-    document.getElementById('container-wrap').style.backgroundPosition = "top left";
     if (contentWrap) {
         const links = contentWrap.getElementsByTagName('a');
         for (let i = 0; i < links.length; i++) {
@@ -91,11 +90,11 @@ function applyStyles() {
     }
 
     // Change color of footer links
-    const pageOptionsBottom = document.getElementById('page-options-bottom');
+    const pageOptionsBottom = document.getElementsByClassName('page-options-bottom');
     if (pageOptionsBottom) {
-        const footerLinks = pageOptionsBottom.querySelectorAll('a');
-        footerLinks.forEach(link => {
-            link.style.color = "#9179E7";
-        });
+        const footerLinks = pageOptionsBottom.getElementsByTagName('a');
+        for (let i = 0; i < footerLinks.length; i++) {
+            footerLinks[i].style.color = "#9179E7";
+        }
     }
 }
