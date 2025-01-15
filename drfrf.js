@@ -5,7 +5,7 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 });
 
-const applyStyles = () => {
+function applyStyles() {
     // Check if page should be excluded based on tags
     const pageTagsElement = document.querySelector('.page-tags');
     const pageTagsText = pageTagsElement ? pageTagsElement.innerText.toLowerCase() : '';
@@ -20,10 +20,18 @@ const applyStyles = () => {
     if (headerElement) {
         const children = headerElement.getElementsByTagName('*');
         for (let i = 0; i < children.length; i++) {
-            const style = window.getComputedStyle(children[i], '::before');
-            if (style.content && style.content !== 'none') {
+            const beforeStyle = window.getComputedStyle(children[i], '::before');
+            const afterStyle = window.getComputedStyle(children[i], '::after');
+            if ((beforeStyle.content && beforeStyle.content !== 'none') ||
+                (afterStyle.content && afterStyle.content !== 'none')) {
                 return;
             }
+        }
+        const headerBeforeStyle = window.getComputedStyle(headerElement, '::before');
+        const headerAfterStyle = window.getComputedStyle(headerElement, '::after');
+        if ((headerBeforeStyle.content && headerBeforeStyle.content !== 'none') ||
+            (headerAfterStyle.content && headerAfterStyle.content !== 'none')) {
+            return;
         }
     }
 
@@ -44,18 +52,19 @@ const applyStyles = () => {
             }
         }
     }
+
+    // Change background color
     const containerWrap = document.getElementById('container-wrap');
     if (containerWrap) {
-        const containerWrap = document.getElementById('container-wrap');
-        if (containerWrap) {
-            containerWrap.style.backgroundColor = "#1a1a1a";
+        containerWrap.style.backgroundColor = "#1a1a1a";
 
-            // Change background image
-            containerWrap.style.backgroundImage = "url('https://files.scpfoundation.net/local--files/theme:night-rush-theme/night-rush-header.png')";
-            containerWrap.style.backgroundPosition = "top left";
-            containerWrap.style.backgroundRepeat = "repeat-x";
-        }
+        // Change background image
+        containerWrap.style.backgroundImage = "url('https://files.scpfoundation.net/local--files/theme:night-rush-theme/night-rush-header.png')";
+        containerWrap.style.backgroundPosition = "top left";
+        containerWrap.style.backgroundRepeat = "repeat-x";
     }
+
+    // Change color of links
     document.getElementById('container-wrap').style.backgroundPosition = "top left";
     if (contentWrap) {
         const links = contentWrap.getElementsByTagName('a');
@@ -84,9 +93,9 @@ const applyStyles = () => {
     // Change color of footer links
     const pageOptionsBottom = document.getElementById('page-options-bottom');
     if (pageOptionsBottom) {
-        const footerLinks = pageOptionsBottom.getElementsByTagName('a');
-        for (let i = 0; i < footerLinks.length; i++) {
-            footerLinks[i].style.color = "#9179E7";
-        }
+        const footerLinks = pageOptionsBottom.querySelectorAll('a');
+        footerLinks.forEach(link => {
+            link.style.color = "#9179E7";
+        });
     }
 }
