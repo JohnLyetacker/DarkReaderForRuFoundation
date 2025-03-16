@@ -1,8 +1,6 @@
 document.addEventListener('DOMContentLoaded', () => {
     applyStyles();
-
     setTimeout(applyStyles, 4000);
-
 });
 
 function applyStyles() {
@@ -26,13 +24,30 @@ function applyStyles() {
                 (afterStyle.content && afterStyle.content !== 'none')) {
                 return;
             }
+            
         }
-        const headerBeforeStyle = window.getComputedStyle(headerElement, '::before');
+        //do i need this shit?
+        /*const headerBeforeStyle = window.getComputedStyle(headerElement, '::before');
         const headerAfterStyle = window.getComputedStyle(headerElement, '::after');
         if ((headerBeforeStyle.content && headerBeforeStyle.content !== 'none') ||
             (headerAfterStyle.content && headerAfterStyle.content !== 'none')) {
             return;
-        }
+        }*/
+        /*const h1Elements = headerElement.getElementsByTagName('h1');
+        for (let i = 0; i < h1Elements.length; i++) {
+            const aElements = h1Elements[i].getElementsByTagName('a');
+            for (let j = 0; j < aElements.length; j++) {
+                //const spanElements = aElements[j].getElementsByTagName('span');
+                //for (let k = 0; k < spanElements.length; k++) {
+                    const aBeforeStyle = window.getComputedStyle(aElements[k], '::before');
+                    const aAfterStyle = window.getComputedStyle(aElements[k], '::after');
+                    if ((aBeforeStyle.content && aBeforeStyle.content !== 'none') ||
+                        (aAfterStyle.content && aAfterStyle.content !== 'none')) {
+                        return;
+                    }
+               // }
+            }
+        }*/
     }
 
     // Exclude specific page elements from being darkened

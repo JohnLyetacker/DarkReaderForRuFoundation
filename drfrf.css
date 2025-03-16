@@ -9,6 +9,23 @@
     box-shadow: inset 2px 3px 6px rgb(0, 0, 0);
 }
 
+.forum-thread-box .post-container {
+    border-left-color: white;
+    border-left-style: solid;
+    border-left-width: 1px;
+    padding-left: 10px;
+    /*border-block-end-color: black;
+    border-block-end-style: solid;
+    border-block-end-width: 1px;*/
+}
+
+.post {
+    padding-top: 0px !important;
+    padding-bottom: 0px !important;
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
 /* idk why but this one doenst wanna work */
 .w-forum-thread-options>.btn {
     color: #9179e7;
