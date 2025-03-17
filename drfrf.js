@@ -13,6 +13,8 @@ function applyStyles() {
         return;
     }
 
+    /* ==== FIGURE OUT HERE HOW TO ABANDON SCRIPT IF THE PAGE HAS CUSTOM THEME ==== */
+
     // FUCK FUCK THIS PAGE HAS NONSTANDARD HEADER ALL ABANDON SHIP
     const headerElement = document.getElementById('header');
     if (headerElement) {
@@ -65,6 +67,8 @@ function applyStyles() {
             }
         }
     }
+
+    /* ==== THIS PART SHOULD GO TO CSS ==== */
 
     // Change background color
     const containerWrap = document.getElementById('container-wrap');

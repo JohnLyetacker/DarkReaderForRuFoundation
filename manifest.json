@@ -22,6 +22,7 @@
                 "*://*.scpfoundation.net/component:*",
                 "*://*.scpfoundation.net/fragment:*",
                 "*://*.scpfoundation.net/-/*"
+                
             ],
             "js": [
                 "drfrf.js"
