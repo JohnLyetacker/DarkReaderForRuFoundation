@@ -4,6 +4,10 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 
 function applyStyles() {
+    const contentWrap = document.getElementById('content-wrap');
+    const containerWrap = document.getElementById('container-wrap');
+    const header = document.getElementById('header');
+
     // Check if page should be excluded based on tags
     const pageTagsElement = document.querySelector('.page-tags');
     const pageTagsText = pageTagsElement ? pageTagsElement.innerText.toLowerCase() : '';
@@ -15,49 +19,13 @@ function applyStyles() {
 
     /* ==== FIGURE OUT HERE HOW TO ABANDON SCRIPT IF THE PAGE HAS CUSTOM THEME ==== */
 
-    // FUCK FUCK THIS PAGE HAS NONSTANDARD HEADER ALL ABANDON SHIP
-    const headerElement = document.getElementById('header');
-    if (headerElement) {
-        const children = headerElement.getElementsByTagName('*');
-        for (let i = 0; i < children.length; i++) {
-            const beforeStyle = window.getComputedStyle(children[i], '::before');
-            const afterStyle = window.getComputedStyle(children[i], '::after');
-            if ((beforeStyle.content && beforeStyle.content !== 'none') ||
-                (afterStyle.content && afterStyle.content !== 'none')) {
-                return;
-            }
-            
-        }
-        //do i need this shit?
-        /*const headerBeforeStyle = window.getComputedStyle(headerElement, '::before');
-        const headerAfterStyle = window.getComputedStyle(headerElement, '::after');
-        if ((headerBeforeStyle.content && headerBeforeStyle.content !== 'none') ||
-            (headerAfterStyle.content && headerAfterStyle.content !== 'none')) {
-            return;
-        }*/
-        /*const h1Elements = headerElement.getElementsByTagName('h1');
-        for (let i = 0; i < h1Elements.length; i++) {
-            const aElements = h1Elements[i].getElementsByTagName('a');
-            for (let j = 0; j < aElements.length; j++) {
-                //const spanElements = aElements[j].getElementsByTagName('span');
-                //for (let k = 0; k < spanElements.length; k++) {
-                    const aBeforeStyle = window.getComputedStyle(aElements[k], '::before');
-                    const aAfterStyle = window.getComputedStyle(aElements[k], '::after');
-                    if ((aBeforeStyle.content && aBeforeStyle.content !== 'none') ||
-                        (aAfterStyle.content && aAfterStyle.content !== 'none')) {
-                        return;
-                    }
-               // }
-            }
-        }*/
-    }
-
     // Exclude specific page elements from being darkened
-    const contentWrap = document.getElementById('content-wrap');
+
     if (contentWrap) {
         const elements = contentWrap.getElementsByTagName('*');
         for (let i = 0; i < elements.length; i++) {
-            if (!elements[i].closest('.apcs-container') &&
+            if (!elements[i].closest('.w-iframe-autoresize') &&
+                !elements[i].closest('.apcs-container') &&
                 !elements[i].closest('.anom-bar-container') &&
                 !elements[i].closest('.random-article-block') &&
                 !elements[i].closest('.scp-front-button') &&
@@ -68,18 +36,21 @@ function applyStyles() {
         }
     }
 
-    /* ==== THIS PART SHOULD GO TO CSS ==== */
-
-    // Change background color
-    const containerWrap = document.getElementById('container-wrap');
+    // Change background color, image etc. Check if it's black highlighter and leave.
     if (containerWrap) {
-        containerWrap.style.backgroundColor = "#1a1a1a";
-
-        // Change background image
-        containerWrap.style.backgroundImage = "url('https://files.scpfoundation.net/local--files/theme:night-rush-theme/night-rush-header.png')";
-        containerWrap.style.backgroundPosition = "top left";
-        containerWrap.style.backgroundRepeat = "repeat-x";
+        containerWrap.style.backgroundColor = '#1a1a1a';
+        containerWrap.style.backgroundPosition = 'top left';
+        containerWrap.style.backgroundRepeat = 'repeat-x';
+        setTimeout(() => {
+            if (getComputedStyle(containerWrap).getPropertyValue('background-image') == 'repeating-linear-gradient(45deg, rgba(255, 255, 255, 0), rgba(255, 255, 255, 0) 1.53333px, rgba(88, 88, 88, 0.1) 2.15px, rgba(88, 88, 88, 0.2) 3.06667px)') {
+                return;
+            }
+            else {
+                containerWrap.style.backgroundImage = `url('https://files.scpfoundation.net/local--files/theme:night-rush-theme/night-rush-header.png'`;
+            }
+        }, 1000);
     }
+
 
     // Change color of links
     if (contentWrap) {
