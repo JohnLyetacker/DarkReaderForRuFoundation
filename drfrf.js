@@ -6,12 +6,11 @@ document.addEventListener('DOMContentLoaded', () => {
 function applyStyles() {
     const contentWrap = document.getElementById('content-wrap');
     const containerWrap = document.getElementById('container-wrap');
-    const header = document.getElementById('header');
 
     // Check if page should be excluded based on tags
     const pageTagsElement = document.querySelector('.page-tags');
     const pageTagsText = pageTagsElement ? pageTagsElement.innerText.toLowerCase() : '';
-    const excludedWords = ['назидание', 'зона_17', 'визуальная_тема']; // Tags to exclude pages with other themes
+    const excludedWords = ['назидание', 'зона_17', 'визуальная_тема', 'удаления']; // Tags to exclude pages with other themes
     const shouldExclude = excludedWords.some(word => pageTagsText.includes(word));
     if (shouldExclude) {
         return;
@@ -19,12 +18,15 @@ function applyStyles() {
 
     /* ==== FIGURE OUT HERE HOW TO ABANDON SCRIPT IF THE PAGE HAS CUSTOM THEME ==== */
 
-    // Exclude specific page elements from being darkened
+    // Exclude specific page elements from being darkened, darken all others, whiten their font color
 
     if (contentWrap) {
         const elements = contentWrap.getElementsByTagName('*');
         for (let i = 0; i < elements.length; i++) {
-            if (!elements[i].closest('.w-iframe-autoresize') &&
+            if (!elements[i].closest('.canon-block') &&
+                !elements[i].closest('iframe') &&
+                !elements[i].closest('.archieved-message') &&
+                !elements[i].closest('.the-cd-ver2-container') &&
                 !elements[i].closest('.apcs-container') &&
                 !elements[i].closest('.anom-bar-container') &&
                 !elements[i].closest('.random-article-block') &&
@@ -41,14 +43,7 @@ function applyStyles() {
         containerWrap.style.backgroundColor = '#1a1a1a';
         containerWrap.style.backgroundPosition = 'top left';
         containerWrap.style.backgroundRepeat = 'repeat-x';
-        setTimeout(() => {
-            if (getComputedStyle(containerWrap).getPropertyValue('background-image') == 'repeating-linear-gradient(45deg, rgba(255, 255, 255, 0), rgba(255, 255, 255, 0) 1.53333px, rgba(88, 88, 88, 0.1) 2.15px, rgba(88, 88, 88, 0.2) 3.06667px)') {
-                return;
-            }
-            else {
-                containerWrap.style.backgroundImage = `url('https://files.scpfoundation.net/local--files/theme:night-rush-theme/night-rush-header.png'`;
-            }
-        }, 1000);
+        containerWrap.style.backgroundImage = 'repeating-linear-gradient(45deg, rgba(255, 255, 255, 0), rgba(255, 255, 255, 0) 1.53333px, rgba(88, 88, 88, 0.1) 2.15px, rgba(88, 88, 88, 0.2) 3.06667px)'
     }
 
 

@@ -1,9 +1,72 @@
+/* This extension's current CSS is a derivative from "Night Rush Theme", credits below. */
 
+/*
+    Night Rush Theme
+    [2020 Wikidot Theme]
+    Created for the SCP Wiki by Nagiros
+    Obviously based on the Sigma-9 Theme for the SCP Foundation by Aelanna
+    2022 adaptation for RuFoundation by John_Lyetacker & Intervent
+    https://scp-wiki.wikidot.com/theme:night-rush-theme
+    https://scpfoundation.net/theme:night-rush-theme
+*/
+
+/* sidebar changes */
+.new-heading {
+    border-top: solid 1px #9179e7;
+}
+
+.new-bar .side-block .menu-item img {
+    filter: hue-rotate(270deg);
+}
+
+.old-bar .side-block .menu-item img {
+    filter: hue-rotate(270deg) !important;
+}
+
+/* topbar changes */
+#top-bar a {
+    /*  link to dropdown  */
+    color: #e6e6e6;
+}
+
+#top-bar ul li ul {
+    /*  dropdown  */
+    background-color: #121212;
+    border-color: #e6e6e6;
+}
+
+#top-bar ul li.sfhover a,
+#top-bar ul li:hover a {
+    /*  grey link background  */
+    background-color: #262626;
+    color: #e6e6e6;
+}
+
+#top-bar ul li.sfhover a:hover,
+#top-bar ul li:hover a:hover {
+    /*  hover on links  */
+    background-color: #5c5c5c;
+}
+
+#top-bar ul li.sfhover ul li a,
+#top-bar ul li:hover ul li a {
+    /*  dropdown borders  */
+    border-top-color: #e6e6e6;
+}
+
+@media (max-width: 767px) {
+    /*  mobile side button  */
+    #top-bar .open-menu a {
+        background-color: #7a7a7a;
+        border-color: #2b2b2b;
+        color: #2b2b2b;
+    }
+}
 
 /* forum changes */
 .thread-container .post .head {
-    background-image: linear-gradient(to right, #1a1a1a, #1a1a1a);
-    box-shadow: inset 2px 3px 6px rgb(0, 0, 0);
+    background-image: linear-gradient(to right, #1a1a1a, #1a1a1a) !important;
+    box-shadow: inset 2px 3px 6px rgb(0, 0, 0) !important;
 }
 
 .forum-thread-box .description-block {
@@ -12,14 +75,9 @@
     box-shadow: inset 2px 3px 6px rgb(0, 0, 0);
 }
 
-.forum-thread-box .post-container {
-    border-left-color: white;
-    border-left-style: solid;
-    border-left-width: 1px;
-    padding-left: 10px;
-    /*border-block-end-color: black;
-    border-block-end-style: solid;
-    border-block-end-width: 1px;*/
+.post-container .post-container {
+    border-left: 2px solid rgba(155, 155, 155, 0.25);
+    padding-left: .75rem;
 }
 
 .post {
@@ -28,6 +86,23 @@
     margin-top: 10px;
     margin-bottom: 10px;
 }
+
+/* let these live*/
+iframe,
+.archieved-message,
+.the-cd-ver2-container,
+.canon-block {
+    background-color: #eeeeee !important;
+    color: #333333 !important;
+}
+
+iframe a,
+.archieved-message a,
+.the-cd-ver2-container a,
+.canon-block a {
+    color: #9179e7 !important;
+}
+
 
 /* idk why but this one doenst wanna work */
 .w-forum-thread-options>.btn {
