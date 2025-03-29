@@ -4,7 +4,6 @@ document.addEventListener('DOMContentLoaded', () => {
 
 function handleMutations(mutationsList, globalObserver) {
     for (const mutation of mutationsList) {
-        console.log('Mutation detected:', mutation);
         applyStyles();
     }
 }
