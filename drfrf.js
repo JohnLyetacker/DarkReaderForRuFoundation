@@ -1,6 +1,21 @@
 document.addEventListener('DOMContentLoaded', () => {
     applyStyles();
-    setTimeout(applyStyles, 4000);
+});
+
+function handleMutations(mutationsList, globalObserver) {
+    for (const mutation of mutationsList) {
+        console.log('Mutation detected:', mutation);
+        applyStyles();
+    }
+}
+
+const globalObserver = new MutationObserver(handleMutations);
+
+document.addEventListener('DOMContentLoaded', () => {
+    globalObserver.observe(document.body, {
+        childList: true,       // Observe addition/removal of child nodes
+        subtree: true          // Observe the entire subtree
+    });
 });
 
 function applyStyles() {
@@ -74,7 +89,7 @@ function applyStyles() {
 
     // I hate interwiki
     document.documentElement.style.setProperty('--new-side-bar-color', '#9179e7');
-    const observer = new MutationObserver((mutations) => {
+    const localObserver = new MutationObserver((mutations) => {
         mutations.forEach((mutation) => {
             if (mutation.addedNodes.length) {
                 const interwikiContainer = document.getElementsByClassName('w-interwiki');
@@ -93,7 +108,7 @@ function applyStyles() {
             }
         });
     });
-    observer.observe(document.body, { childList: true, subtree: true });
+    localObserver.observe(document.body, { childList: true, subtree: true });
 
     // Load CSS file for system css that is not possible to apply via JS
     function loadCSS(filename) {
@@ -104,5 +119,5 @@ function applyStyles() {
         document.head.appendChild(link);
     }
     loadCSS(chrome.runtime.getURL("drfrf.css"));
-    observer.observe(document.body, { childList: true, subtree: true });
+    localObserver.observe(document.body, { childList: true, subtree: true });
 }
