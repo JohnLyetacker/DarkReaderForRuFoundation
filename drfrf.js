@@ -1,21 +1,21 @@
 document.addEventListener('DOMContentLoaded', () => {
     applyStyles();
+    startGlobalObserver();
 });
 
-function handleMutations(mutationsList, globalObserver) {
-    for (const mutation of mutationsList) {
-        applyStyles();
+function startGlobalObserver() {
+    function handleMutations(mutationsList, _globalObserver) {
+        for (const _mutation of mutationsList) {
+            applyStyles();
+            return;
+        }
     }
-}
-
-const globalObserver = new MutationObserver(handleMutations);
-
-document.addEventListener('DOMContentLoaded', () => {
+    const globalObserver = new MutationObserver(handleMutations);
     globalObserver.observe(document.body, {
-        childList: true,       // Observe addition/removal of child nodes
-        subtree: true          // Observe the entire subtree
+        childList: true,
+        subtree: true
     });
-});
+}
 
 function applyStyles() {
     const contentWrap = document.getElementById('content-wrap');
@@ -24,16 +24,18 @@ function applyStyles() {
     // Check if page should be excluded based on tags
     const pageTagsElement = document.querySelector('.page-tags');
     const pageTagsText = pageTagsElement ? pageTagsElement.innerText.toLowerCase() : '';
-    const excludedWords = ['назидание', 'зона_17', 'визуальная_тема', 'удаления']; // Tags to exclude pages with other themes
+    const excludedWords = [
+        'назидание',
+        'зона_17',
+        'визуальная_тема',
+        'удаления'
+    ];
     const shouldExclude = excludedWords.some(word => pageTagsText.includes(word));
     if (shouldExclude) {
         return;
     }
 
-    /* ==== FIGURE OUT HERE HOW TO ABANDON SCRIPT IF THE PAGE HAS CUSTOM THEME ==== */
-
     // Exclude specific page elements from being darkened, darken all others, whiten their font color
-
     if (contentWrap) {
         const elements = contentWrap.getElementsByTagName('*');
         for (let i = 0; i < elements.length; i++) {
@@ -59,7 +61,6 @@ function applyStyles() {
         containerWrap.style.backgroundRepeat = 'repeat-x';
         containerWrap.style.backgroundImage = 'repeating-linear-gradient(45deg, rgba(255, 255, 255, 0), rgba(255, 255, 255, 0) 1.53333px, rgba(88, 88, 88, 0.1) 2.15px, rgba(88, 88, 88, 0.2) 3.06667px)'
     }
-
 
     // Change color of links
     if (contentWrap) {
