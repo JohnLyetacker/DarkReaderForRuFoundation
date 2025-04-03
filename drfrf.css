@@ -24,6 +24,10 @@
     filter: hue-rotate(270deg) !important;
 }
 
+.new-side-block h6 a {
+    color: #fff !important;
+}
+
 /* topbar changes */
 
 #top-bar a {
