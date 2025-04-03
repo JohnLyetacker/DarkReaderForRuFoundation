@@ -2,7 +2,7 @@
     "manifest_version": 3,
     "name": "D R F R F",
     "version": "0.5",
-    "description": "Dark reader for RuFoundation. Adds specific dark theme for scpfoundation.net.",
+    "description": "Dark Reader For RuFoundation. Adds specific dark theme for scpfoundation.net/scp.su.",
     "icons": {
         "48": "icons/interior.png"
     },
@@ -22,10 +22,12 @@
                 "*://*.scpfoundation.net/component:*",
                 "*://*.scpfoundation.net/fragment:*",
                 "*://*.scpfoundation.net/-/*"
-                
             ],
             "js": [
                 "drfrf.js"
+            ],
+            "css": [
+                "drfrf.css"
             ],
             "run_at": "document_start"
         }

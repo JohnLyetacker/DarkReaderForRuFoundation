@@ -3,6 +3,7 @@ document.addEventListener('DOMContentLoaded', () => {
     startGlobalObserver();
 });
 
+// This observes any mutations, applies styles and quits
 function startGlobalObserver() {
     function handleMutations(mutationsList, _globalObserver) {
         for (const _mutation of mutationsList) {
@@ -23,6 +24,9 @@ function applyStyles() {
     const pageContent = document.getElementById('page-content');
     const pageTagsElement = document.querySelector('.page-tags');
     const pageTagsText = pageTagsElement ? pageTagsElement.innerText.toLowerCase() : '';
+
+
+    // Check if page should be excluded based on tags, add tags below
     const excludedWords = [
         'назидание',
         'зона_17',
@@ -30,8 +34,6 @@ function applyStyles() {
         'удаления'
     ];
     const shouldExclude = excludedWords.some(word => pageTagsText.includes(word));
-    
-    // Check if page should be excluded based on tags
     if (shouldExclude) {
         return;
     }
@@ -51,7 +53,7 @@ function applyStyles() {
                 !elements[i].closest('.scp-front-button') &&
                 !elements[i].closest('.lb-article-class')) {
                 elements[i].style.backgroundColor = "#1a1a1a";
-                elements[i].style.color = "#c2c2c2";
+                elements[i].style.color = "#dedede";
             }
         }
     }
@@ -89,7 +91,7 @@ function applyStyles() {
         }
     }
 
-    // I hate interwiki
+    // Local Interwiki observer
     document.documentElement.style.setProperty('--new-side-bar-color', '#9179e7');
     const localObserver = new MutationObserver((mutations) => {
         mutations.forEach((mutation) => {

@@ -11,6 +11,7 @@
 */
 
 /* sidebar changes */
+
 .new-heading {
     border-top: solid 1px #c2c2c2;
 }
@@ -24,9 +25,10 @@
 }
 
 /* topbar changes */
+
 #top-bar a {
     /*  link to dropdown  */
-    color: #e6e6e6;
+    color: #ebebeb;
 }
 
 #top-bar ul li ul {
@@ -39,7 +41,7 @@
 #top-bar ul li:hover a {
     /*  grey link background  */
     background-color: #262626;
-    color: #e6e6e6;
+    color: #fff;
 }
 
 #top-bar ul li.sfhover a:hover,
@@ -59,11 +61,12 @@
     #top-bar .open-menu a {
         background-color: #7a7a7a;
         border-color: #2b2b2b;
-        color: #2b2b2b;
+        color: #fff;
     }
 }
 
 /* forum changes */
+
 .thread-container .post .head {
     background-image: linear-gradient(to right, #1a1a1a, #1a1a1a) !important;
     box-shadow: inset 2px 3px 6px rgb(0, 0, 0) !important;
@@ -87,7 +90,8 @@
     margin-bottom: 10px;
 }
 
-/* let these live*/
+/* default this to base white background */
+
 iframe,
 .archieved-message,
 .the-cd-ver2-container,
@@ -100,11 +104,11 @@ iframe a,
 .archieved-message a,
 .the-cd-ver2-container a,
 .canon-block a {
-    color: #c2c2c2 !important;
+    color: #fff !important;
 }
 
+/* idk why but this one doenst wanna work :c */
 
-/* idk why but this one doenst wanna work */
 .w-forum-thread-options>.btn {
     color: #c2c2c2;
 }
@@ -114,5 +118,5 @@ iframe a,
 }
 
 #license-area a {
-    color: #c2c2c2;
+    color: #fff;
 }
