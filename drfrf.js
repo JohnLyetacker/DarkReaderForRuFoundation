@@ -20,8 +20,7 @@ function startGlobalObserver() {
 function applyStyles() {
     const contentWrap = document.getElementById('content-wrap');
     const containerWrap = document.getElementById('container-wrap');
-
-    // Check if page should be excluded based on tags
+    const pageContent = document.getElementById('page-content');
     const pageTagsElement = document.querySelector('.page-tags');
     const pageTagsText = pageTagsElement ? pageTagsElement.innerText.toLowerCase() : '';
     const excludedWords = [
@@ -31,6 +30,8 @@ function applyStyles() {
         'удаления'
     ];
     const shouldExclude = excludedWords.some(word => pageTagsText.includes(word));
+    
+    // Check if page should be excluded based on tags
     if (shouldExclude) {
         return;
     }
@@ -41,6 +42,7 @@ function applyStyles() {
         for (let i = 0; i < elements.length; i++) {
             if (!elements[i].closest('.canon-block') &&
                 !elements[i].closest('iframe') &&
+                !elements[i].closest('hr') &&
                 !elements[i].closest('.archieved-message') &&
                 !elements[i].closest('.the-cd-ver2-container') &&
                 !elements[i].closest('.apcs-container') &&
@@ -49,7 +51,7 @@ function applyStyles() {
                 !elements[i].closest('.scp-front-button') &&
                 !elements[i].closest('.lb-article-class')) {
                 elements[i].style.backgroundColor = "#1a1a1a";
-                elements[i].style.color = "#ededed";
+                elements[i].style.color = "#c2c2c2";
             }
         }
     }
@@ -71,10 +73,10 @@ function applyStyles() {
                     links[i].style.color = "#d61";
                     continue;
                 }
-                links[i].style.color = "#9179E7";
+                links[i].style.color = "#fff";
                 const childElements = links[i].getElementsByTagName('*');
                 for (let j = 0; j < childElements.length; j++) {
-                    childElements[j].style.color = "#9179E7";
+                    childElements[j].style.color = "#fff";
                     // Change color of elements with .scp-front-title class
                     const scpFrontTitleElements = document.getElementsByClassName('scp-front-title');
                     if (scpFrontTitleElements.length > 0) {
@@ -100,7 +102,7 @@ function applyStyles() {
                             sideBlockElements[j].style.backgroundColor = "#1a1a1a";
                             const links = sideBlockElements[j].getElementsByTagName('a');
                             for (let k = 0; k < links.length; k++) {
-                                links[k].style.color = "#9179E7";
+                                links[k].style.color = "#fff";
                             }
                         }
                     }

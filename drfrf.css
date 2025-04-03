@@ -12,7 +12,7 @@
 
 /* sidebar changes */
 .new-heading {
-    border-top: solid 1px #9179e7;
+    border-top: solid 1px #c2c2c2;
 }
 
 .new-bar .side-block .menu-item img {
@@ -100,19 +100,19 @@ iframe a,
 .archieved-message a,
 .the-cd-ver2-container a,
 .canon-block a {
-    color: #9179e7 !important;
+    color: #c2c2c2 !important;
 }
 
 
 /* idk why but this one doenst wanna work */
 .w-forum-thread-options>.btn {
-    color: #9179e7;
+    color: #c2c2c2;
 }
 
 .page-options-bottom>.btn {
-    color: #9179e7;
+    color: #c2c2c2;
 }
 
 #license-area a {
-    color: #9179e7;
+    color: #c2c2c2;
 }
