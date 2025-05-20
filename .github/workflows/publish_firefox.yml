@@ -46,8 +46,8 @@ jobs:
           releaseNotes: ${{ github.event.release.body }}
           license: MPL-2.0
 
-          apiKey: ${{ secrets.FIREFOX_API_SECRET }}
-          apiSecret: ${{ secrets.FIREFOX_SECRET }}
+          apiKey: ${{ secrets.FIREFOX_ISSUER }}
+          apiSecret: ${{ secrets.FIREFOX_API_SECRET }}
           timeout: 900000
 
       - name: "Attach release assets to release"
