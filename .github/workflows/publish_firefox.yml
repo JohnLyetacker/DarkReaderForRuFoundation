@@ -31,7 +31,7 @@ jobs:
           cmd: sign
           verbose: true
           channel: listed
-          source: ${{ env.PACKAGE_NAME }}
+          sourceCode: ${{ env.PACKAGE_NAME }}
           metaDataFile: metadata.json
           license: MPL-2.0
           apiKey: ${{ secrets.FIREFOX_ISSUER }}
