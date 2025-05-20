@@ -18,13 +18,20 @@ jobs:
     steps:
       - name: Checkout code
         uses: actions/checkout@v3
+      - name: Pack extension
+        uses: kewisch/action-web-ext@v1.3
+        with:
+          cmd: build
+          verbose: true
+          filename: ${{ env.PACKAGE_NAME }}
+          ignoreFiles: [".git/*", ".github/*", ".gitignore"]
       - name: Sign extension
         uses: kewisch/action-web-ext@v1.3
         with:
           cmd: sign
           verbose: true
           channel: listed
-          # ignoreFiles: [".git/*", ".github/*", ".gitignore"]
+          source: ${{ env.PACKAGE_NAME }}
           metaDataFile: metadata.json
           license: MPL-2.0
           apiKey: ${{ secrets.FIREFOX_ISSUER }}
