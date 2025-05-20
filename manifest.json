@@ -1,7 +1,7 @@
 {
     "manifest_version": 3,
     "name": "D R F R F",
-    "version": "0.5.1",
+    "version": "0.5.2",
     "description": "Dark Reader For RuFoundation. Adds specific dark theme for scpfoundation.net/scp.su.",
     "icons": {
         "48": "icons/interior.png"
