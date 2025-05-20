@@ -3,9 +3,6 @@ on:
   release:
     types: [published]
 
-env:
-  PACKAGE_NAME: drfrf-${{ github.event.release.tag_name }}.xpi
-
 jobs:
   sign:
     name: "Release"
