@@ -16,13 +16,14 @@ jobs:
         with:
           cmd: lint
           source: .
-          channel: listed
+          channel: unlisted
 
       - name: "web-ext build"
         id: web-ext-build
         uses: kewisch/action-web-ext@v1
         with:
           cmd: build
+          filename: drfrf-${{ github.event.inputs.tag }}
           source: .
 
       - name: "Collect sources"
