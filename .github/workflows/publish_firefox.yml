@@ -23,7 +23,6 @@ jobs:
         uses: kewisch/action-web-ext@v1
         with:
           cmd: build
-          filename: drfrf-${{ github.event.inputs.tag }}.xpi
           source: .
 
       - name: "Collect sources"
@@ -53,7 +52,7 @@ jobs:
 
       - name: "Attach release assets to release"
         env:
-          GH_TOKEN: ${{ github.token }}
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
           gh release upload ${{ github.event.release.tag_name }} \
             ${{ steps.web-ext-sign.outputs.target }}
