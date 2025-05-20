@@ -11,12 +11,12 @@ jobs:
   publish:
     name: Publish
     runs-on: ubuntu-latest
+    permissions: write-all
     steps:
       - name: Checkout code
         uses: actions/checkout@v3
       - name: Zip extension
         run: |
-          cd ../
           echo $(ls -a)
           zip package_firefox.zip * -x ".git/*" ".github/*" ".gitignore"
       - name: Create Release
