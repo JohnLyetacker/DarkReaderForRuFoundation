@@ -23,7 +23,7 @@ jobs:
         uses: kewisch/action-web-ext@v1
         with:
           cmd: build
-          filename: drfrf-${{ github.event.inputs.tag }}
+          filename: drfrf-${{ github.event.inputs.tag }}.xpi
           source: .
 
       - name: "Collect sources"
