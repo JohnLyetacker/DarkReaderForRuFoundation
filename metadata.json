@@ -1,0 +1,5 @@
+{
+  "version": { "license": "MPL-2.0" },
+  "categories": { "firefox": [] },
+  "summary": "Dark reader for RuFoundation. Adds specific dark theme for scpfoundation.net."
+}
