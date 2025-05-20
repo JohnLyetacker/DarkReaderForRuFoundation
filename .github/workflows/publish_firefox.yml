@@ -16,8 +16,9 @@ jobs:
         uses: actions/checkout@v3
       - name: Zip extension
         run: |
-          cd ../../
-          zip package_firefox.zip -x ".git/*" ".github/*" ".gitignore"
+          cd ../
+          echo $(ls -a)
+          zip package_firefox.zip * -x ".git/*" ".github/*" ".gitignore"
       - name: Create Release
         id: create_release
         uses: actions/create-release@v1
