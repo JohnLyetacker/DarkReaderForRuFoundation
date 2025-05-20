@@ -18,7 +18,7 @@ jobs:
         uses: kewisch/action-web-ext@v1
         with:
           cmd: lint
-          source: src
+          source: .
           channel: listed
 
       - name: "web-ext build"
