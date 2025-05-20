@@ -7,6 +7,9 @@ on:
         required: true
         default: 'v1.0.0'
 
+env:
+  PACKAGE_NAME: drfrf-${{ github.event.inputs.tag }}.xpi
+
 jobs:
   publish:
     name: Publish
@@ -15,10 +18,17 @@ jobs:
     steps:
       - name: Checkout code
         uses: actions/checkout@v3
-      - name: Zip extension
-        run: |
-          echo $(ls -a)
-          zip package_firefox.zip * -x ".git/*" ".github/*" ".gitignore"
+      - name: Sign extension
+        uses: kewisch/action-web-ext@v1.3
+        with:
+          cmd: sign
+          verbose: true
+          channel: listed
+          # ignoreFiles: [".git/*", ".github/*", ".gitignore"]
+          metaDataFile: metadata.json
+          license: MPL-2.0
+          apiKey: ${{ secrets.FIREFOX_ISSUER }}
+          apiSecret: ${{ secrets.FIREFOX_API_SECRET }}
       - name: Create Release
         id: create_release
         uses: actions/create-release@v1
@@ -26,7 +36,7 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
           tag_name: ${{ github.event.inputs.tag }}
-          release_name: Release ${{ github.event.inputs.tag }}
+          release_name: D R F R F ${{ github.event.inputs.tag }}
           draft: false
           prerelease: false
       - name: Upload release
@@ -38,7 +48,8 @@ jobs:
           asset_content_type: application/zip
 
 
-
+      
+          
 
 
 
