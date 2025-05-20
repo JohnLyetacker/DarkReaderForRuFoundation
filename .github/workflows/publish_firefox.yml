@@ -5,6 +5,7 @@ on:
 
 jobs:
   sign:
+    permissions: write-all
     name: "Release"
     runs-on: ubuntu-latest
     steps:
@@ -16,7 +17,7 @@ jobs:
         with:
           cmd: lint
           source: .
-          channel: unlisted
+          channel: listed
 
       - name: "web-ext build"
         id: web-ext-build
