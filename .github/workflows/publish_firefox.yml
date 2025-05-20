@@ -1,60 +1,64 @@
 name: Publish on firefox store
 on:
-  workflow_dispatch:
-    inputs:
-      tag:
-        description: 'Release tag'
-        required: true
-        default: 'v1.0.0'
+  release:
+    types: [published]
 
 env:
   PACKAGE_NAME: drfrf-${{ github.event.inputs.tag }}.xpi
 
 jobs:
-  publish:
-    name: Publish
+  sign:
+    name: "Release"
     runs-on: ubuntu-latest
-    permissions: write-all
     steps:
-      - name: Checkout code
-        uses: actions/checkout@v3
-      - name: Pack extension
-        uses: kewisch/action-web-ext@v1.3
+      - name: "Checkout"
+        uses: actions/checkout@v4
+
+      - name: "web-ext lint"
+        uses: kewisch/action-web-ext@v1
+        with:
+          cmd: lint
+          source: src
+          channel: listed
+
+      - name: "web-ext build"
+        id: web-ext-build
+        uses: kewisch/action-web-ext@v1
         with:
           cmd: build
-          verbose: true
-          filename: ${{ env.PACKAGE_NAME }}
-          # ignoreFiles: [".git/*", ".github/*", ".gitignore"]
-      - name: Sign extension
-        uses: kewisch/action-web-ext@v1.3
+          source: .
+
+      - name: "Collect sources"
+        run: git archive --format=zip --output=sources.zip ${{ github.ref }}
+
+      - name: "Collect metadata"
+        id: metadata
+        run: echo "json=$(jq -c . < metadata.json)" >> $GITHUB_OUTPUT
+
+      - name: "web-ext sign AMO"
+        id: web-ext-sign
+        uses: kewisch/action-web-ext@v1
         with:
           cmd: sign
-          verbose: true
+
+          source: ${{ steps.web-ext-build.outputs.target }}
+          sourceCode: sources.zip
           channel: listed
-          sourceCode: ${{ env.PACKAGE_NAME }}
+
           metaDataFile: metadata.json
+          releaseNotes: ${{ github.event.release.body }}
           license: MPL-2.0
-          apiKey: ${{ secrets.FIREFOX_ISSUER }}
-          apiSecret: ${{ secrets.FIREFOX_API_SECRET }}
-      - name: Create Release
-        id: create_release
-        uses: actions/create-release@v1
+
+          apiKey: ${{ secrets.FIREFOX_API_SECRET }}
+          apiSecret: ${{ secrets.FIREFOX_SECRET }}
+          timeout: 900000
+
+      - name: "Attach release assets to release"
         env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        with:
-          tag_name: ${{ github.event.inputs.tag }}
-          release_name: D R F R F ${{ github.event.inputs.tag }}
-          draft: false
-          prerelease: false
-      - name: Upload release
-        uses: actions/upload-release-asset@v1
-        with:
-          upload_url: ${{ steps.create_release.outputs.upload_url }}
-          asset_path: package_firefox.zip
-          asset_name: release_firefox.zip
-          asset_content_type: application/zip
-
-
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          gh release upload ${{ github.event.release.tag_name }} \
+            ${{ steps.web-ext-sign.outputs.target }}
       
           
 
