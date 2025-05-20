@@ -24,7 +24,7 @@ jobs:
           cmd: build
           verbose: true
           filename: ${{ env.PACKAGE_NAME }}
-          ignoreFiles: [".git/*", ".github/*", ".gitignore"]
+          # ignoreFiles: [".git/*", ".github/*", ".gitignore"]
       - name: Sign extension
         uses: kewisch/action-web-ext@v1.3
         with:
